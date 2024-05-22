@@ -34,36 +34,43 @@ const SearchedBooks = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("Books: " + books);
-    }, [books]);
-
     return (
         <>
             <Nav/>
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <h1>Search for Books</h1>
-                <Box
-                    component="form"
-                    sx={{
-                        '& .MuiTextField-root': {m: 1, width: '25ch'},
-                    }}
-                    noValidate
-                    autoComplete="on"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        fetchBooks();
-                    }}
-                >
-                    <TextField
-                        id="outlined-controlled"
-                        label="Title"
-                        value={name}
-                        onChange={(event) => {
-                            setName(event.target.value);
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    height: '10vh',
+                    gap: '10px',
+                    marginBottom: '30px',
+                }}>
+
+                    <h1>Search for Books by Title</h1>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': {m: 0, width: '40ch'},
                         }}
-                    />
-                </Box>
+                        noValidate
+                        autoComplete="on"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            fetchBooks();
+                        }}
+                    >
+                        <TextField
+                            id="outlined-controlled"
+                            label="Title"
+                            value={name}
+                            onChange={(event) => {
+                                setName(event.target.value);
+                            }}
+                        />
+                    </Box>
+
+                </div>
                 <Button variant="outlined" onClick={fetchBooks}>Search</Button>
 
                 {loading &&
@@ -80,11 +87,18 @@ const SearchedBooks = () => {
                 {/*{error && <p>Error: {error}</p>}*/}
 
                 {books.length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+
+                    <div>
+                        {books.length } results
+                    <div
+                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+
                         {books.map(book => (
                             <BookCard key={book.isbn13} book={book}/>
                         ))}
                     </div>
+                    </div>
+
                 )}
                 {books.length === 0 && !loading && !error && (
                     <div style={

@@ -1,7 +1,6 @@
 'use client'
 import '../app/globals.css';
 
-import Image from "next/image";
 import BookCard from "@/components/BookCard";
 import Nav from "@/components/Nav";
 import {useEffect, useState} from "react";
@@ -15,16 +14,16 @@ const AllBooks = () => {
     const [books, setBooks] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
-    
+
     const [pagenum, setPageNum] = useState(1);
-    const [numBooks, setNumBooks] = useState(0);
+    const [numBooks, setNumBooks] = useState(10);
 
     const fetchBooks = async () => {
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:4000/book/title?pagenum=${numBooks}&perpage=${pagenum}`);
+            const response = await fetch(`http://localhost:4000/book/title?pagenum=${pagenum}&perpage=${numBooks}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -91,13 +90,13 @@ const AllBooks = () => {
                         }}
                     />
                 </Box>
-                <Button variant="outlined">Search</Button>
+                <Button variant="outlined" onClick={fetchBooks}>Search</Button>
 
                 {loading && <p>Loading...</p>}
-                {/*{error && <p>Error: {error}</p>}*/}
+                {error && <p>Error: {error}</p>}
 
                 {books.length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6">
                         {books.map(book => (
                             <BookCard key={book.isbn13} book={book} />
                         ))}
@@ -112,6 +111,5 @@ const AllBooks = () => {
         </>
     );
 };
-
 
 export default AllBooks;
