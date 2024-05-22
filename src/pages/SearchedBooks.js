@@ -84,7 +84,7 @@ const SearchedBooks = () => {
                     }>
                         <p>Loading...</p>
                     </div>}
-                {/*{error && <p>Error: {error}</p>}*/}
+                {error && <p>Error: {error}</p>}
 
                 {books.length > 0 && (
 

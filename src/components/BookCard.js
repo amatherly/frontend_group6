@@ -31,7 +31,7 @@ const BookCard = ({book}) => {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        alignItems: 'center',
+                        alignItems: 'left',
                         flexGrow: 1,
                         color: 'white',
                     }}>
@@ -48,28 +48,28 @@ const BookCard = ({book}) => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             marginBottom: '10px',
-                            textAlign: 'center',
+                            textAlign: 'left',
                         }}>
                             {shorten(book.title)}
                         </Typography>
-                        <Typography variant="h6" component="div" style={{
-                            textAlign: 'center',
+                        <Typography variant="h7" component="div" style={{
+                            textAlign: 'left',
                             color: 'grey'
                         }}>
                             {book.authors}
                         </Typography>
-                        <Typography variant="h8" component="div" style={{textAlign: 'center'}}>
+                        <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
                             Publication Year: {book.publication}
                         </Typography>
 
-                        <Typography variant="h8" component="div" style={{textAlign: 'center'}}>
+                        <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
                             Average Rating: {book.ratings?.average}
                         </Typography>
 
-                        <Typography variant="h8" component="div" style={{textAlign: 'center'}}>
+                        <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
                             <Rating name="read-only" value={book.ratings?.average} precision={0.1} readOnly/>
                         </Typography>
-                        <Typography variant="h9" component="div" style={{textAlign: 'center'}}>
+                        <Typography variant="h9" component="div" style={{textAlign: 'left'}}>
                             ISBN: {book.isbn13}
                         </Typography>
                     </CardContent>
