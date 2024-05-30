@@ -23,7 +23,7 @@ const AllBooks = () => {
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:4000/book/title?pagenum=${pagenum}&perpage=${numBooks}`);
+            const response = await fetch(`http://localhost:4000/book/getAll?pagenum=${pagenum}&perpage=${numBooks}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
