@@ -17,18 +17,16 @@ const BookCard = ({book}) => {
 
     const displayBook = (isbn) => {
         // Display the book details modal
-        console.log("Book: " + book);
+        console.log("Book: " + isbn);
     }
 
     return (
         <React.Fragment>
-            <div style={{
-                margin: '30px',
-            }}>
-                <Link href={  '#'  } onClick={displayBook(book.isbn13)}>
+            <div>
+                <Link href="#" onClick={() => displayBook(book.isbn13)}>
                     <Card variant="outlined" style={{
                         width: '350px',
-                        height: '700px',
+                        height: '500px',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
@@ -39,52 +37,41 @@ const BookCard = ({book}) => {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
-                            alignItems: 'left',
-                            flexGrow: 1,
+                            alignItems: 'center',
                             color: 'black',
+                            padding: '20px',
+                            textAlign: 'center',
                         }}>
                             <Image
-                                src={book.icons?.large}
-                                width={200}
+                                src={book.icons?.large || '/default-book-cover.png'}
+                                width={150}
                                 height={200}
                                 alt="Picture of the book cover"
                                 style={{
                                     marginBottom: '20px',
+                                    display: 'block',
                                 }}
                             />
                             <Typography variant="h6" component="div" style={{
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 marginBottom: '10px',
-                                textAlign: 'left',
                             }}>
                                 {shorten(book.title)}
                             </Typography>
-
-                            <Typography variant="h7" component="div" style={{textAlign: 'left'}}>
+                            <Typography variant="body2" component="div">
                                 ISBN: {book.isbn13}
                             </Typography>
-
-                            <Typography variant="h7" component="div" style={{
-                                textAlign: 'left',
-                                color: 'grey'
-                            }}>
+                            <Typography variant="body2" component="div" style={{color: 'grey'}}>
                                 {book.authors}
                             </Typography>
-
-
-                            <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
+                            <Typography variant="body2" component="div">
                                 Publication Year: {book.publication}
                             </Typography>
-
-                            <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
+                            <Typography variant="body2" component="div">
                                 Average Rating: {book.ratings?.average}
                             </Typography>
-
-                            <Typography variant="h8" component="div" style={{textAlign: 'left'}}>
-                                <Rating name="read-only" value={book.ratings?.average} precision={0.1} readOnly/>
-                            </Typography>
-
+                            <Rating name="read-only" value={book.ratings?.average} precision={0.1} readOnly/>
                         </CardContent>
                     </Card>
                 </Link>
