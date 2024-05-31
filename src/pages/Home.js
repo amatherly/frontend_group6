@@ -5,7 +5,7 @@ import AllBooks from "@/pages/AllBooks";
 import createBook from "@/pages/CreateBook";
 import '../app/globals.css';
 
-export default function Home() {
+const Home = () =>{
     const book = {
         "isbn13": "9780439023480",
         "authors": "Suzanne Collins",
@@ -43,3 +43,5 @@ export default function Home() {
     )
         ;
 }
+
+export default Home;
