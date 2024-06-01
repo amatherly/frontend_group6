@@ -9,12 +9,18 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+// added this line
+import BookDetails from './BookDetails';  // Imported BoodDetails
 
 const SearchedBooks = () => {
     const [name, setName] = React.useState('');
     const [books, setBooks] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
+    // added thise 3 lines
+    const [selectedBook, setSelectedBook] = React.useState(null); // SelectedBook state
+    const [zoomedBook, setZoomedBook] = React.useState(null); // ZoomedBook state
+    const containerRef = React.useRef(null); // useRef hook to create a ref for the container
 
     const [searchCategory, setSearchCategory] = React.useState('Title');
 
@@ -57,6 +63,26 @@ const SearchedBooks = () => {
             setLoading(false);
         }
     };
+
+    // added these lines
+    const handleBookClick = (book) => {  // handle book click
+        setSelectedBook(book); // update selected book state
+        setZoomedBook(book); // update zoomed book state
+    }
+    // mouse effect lines
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                setSelectedBook(null); // Reset selected book state
+                setZoomedBook(null); // Reset zoomed book state
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <>
@@ -128,6 +154,19 @@ const SearchedBooks = () => {
                     <p>Error: {error}</p>
                 </div>
                 }
+                 {/* Added this */}
+                <div ref={containerRef} className="grid mx-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6" id="book-grid"> {/* Added id attribute with "book-grid" value */}
+                    {books.map(book => (
+                        <div 
+                            key={book.isbn13} 
+                            onClick={() => handleBookClick(book)}
+                            className={zoomedBook === book ? 'zoomed' : ''} // Apply zoom effect 
+                            id={`book-${book.isbn13}`} 
+                        > 
+                            <BookCard book={book} />
+                        </div>
+                    ))}
+                </div>
 
                 {books.length > 0 && (
                     <div style={{
@@ -153,9 +192,16 @@ const SearchedBooks = () => {
                     </div>
                 )}
             </div>
+
+            {/* Added this */}
+            {selectedBook && (
+                <div className={`book-details ${zoomedBook ? 'show' : ''}`}>
+                    <BookDetails book={selectedBook} />
+                </div>
+            )}
         </>
-    )
-        ;
+    );
 };
 
 export default SearchedBooks;
+

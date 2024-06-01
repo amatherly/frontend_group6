@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BookCard from "@/components/BookCard";
+import BookDetails from "@/pages/BookDetails";
 import Nav from "@/components/Nav";
 import AllBooks from "@/pages/AllBooks";
 import createBook from "@/pages/CreateBook";
@@ -7,25 +7,28 @@ import '../app/globals.css';
 
 export default function Home() {
     const book = {
-        "isbn13": "9780439023480",
-        "authors": "Suzanne Collins",
-        "publication": 2008,
-        "original_title": "The Hunger Games",
-        "title": "The Hunger Games (The Hunger Games, #1)",
-        "ratings": {
-            "average": 4.34,
-            "count": 4780653,
-            "rating_1": 66715,
-            "rating_2": 127936,
-            "rating_3": 560092,
-            "rating_4": 1481305,
-            "rating_5": 2706317
-        },
-        "icons": {
-            "large": "https://images.gr-assets.com/books/1447303603m/2767052.jpg",
-            "small": "https://images.gr-assets.com/books/1447303603s/2767052.jpg"
-        }
-    }
+        
+        
+            "isbn13": "9780316160190",
+            "authors": "Stephenie Meyer",
+            "publication": 2006,
+            "original_title": "New Moon (Twilight, #2)",
+            "title": "New Moon (Twilight, #2)",
+            "ratings": {
+                "average": 3.52,
+                "count": 1149630,
+                "rating_1": 102837,
+                "rating_2": 160660,
+                "rating_3": 294207,
+                "rating_4": 290612,
+                "rating_5": 350684
+            },
+            "icons": {
+                "large": "https://images.gr-assets.com/books/1361039440m/49041.jpg",
+                "small": "https://images.gr-assets.com/books/1361039440s/49041.jpg"
+            }
+
+  }
     return (
 
         <>
@@ -34,7 +37,7 @@ export default function Home() {
                 <bookDetails/>
                 <createBook/>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                    <BookCard book={
+                    <BookDetails book={
                         book
                     }/>
                 </div>
