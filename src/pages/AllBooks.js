@@ -3,11 +3,15 @@ import '../app/globals.css';
 
 import BookCard from "@/components/BookCard";
 import Nav from "@/components/Nav";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
+// added this line
+import BookDetails from './BookDetails';  // Imported BoodDetails
+
 
 const AllBooks = () => {
     const [name, setName] = React.useState('');
@@ -16,6 +20,11 @@ const AllBooks = () => {
     const [error, setError] = React.useState(null);
     const [pagenum, setPageNum] = useState(1);
     const [numBooks, setNumBooks] = useState(10);
+
+    // added thise 3 lines
+    const [selectedBook, setSelectedBook] = React.useState(null); // SelectedBook state
+    const [zoomedBook, setZoomedBook] = React.useState(null); // ZoomedBook state
+    const containerRef = React.useRef(null); // useRef hook to create a ref for the container
 
     const fetchBooks = async () => {
         setLoading(true);
@@ -42,6 +51,26 @@ const AllBooks = () => {
     useEffect(() => {
         console.log("Books: " + books);
     }, [books]);
+
+     // added these lines
+     const handleBookClick = (book) => {  // handle book click
+        setSelectedBook(book); // update selected book state
+        setZoomedBook(book); // update zoomed book state
+    }
+    // mouse effect lines
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                setSelectedBook(null); // Reset selected book state
+                setZoomedBook(null); // Reset zoomed book state
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <>
@@ -118,7 +147,27 @@ const AllBooks = () => {
                         <h1>No books found</h1>
                     </div>
                 )}
+
+                   {/* Added this */}
+                   <div ref={containerRef} className="grid mx-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6" id="book-grid"> {/* Added id attribute with "book-grid" value */}
+                    {books.map(book => (
+                        <div 
+                            key={book.isbn13} 
+                            onClick={() => handleBookClick(book)}
+                            className={zoomedBook === book ? 'zoomed' : ''} // Apply zoom effect
+                            id={`book-${book.isbn13}`} 
+                        > 
+                            <BookCard book={book} />
+                        </div>
+                    ))}
+                </div>
             </div>
+                        {/* Added this */}
+                        {selectedBook && (
+                <div className={`book-details ${zoomedBook ? 'show' : ''}`}>
+                    <BookDetails book={selectedBook} />
+                </div>
+            )}
         </>
     );
 };
