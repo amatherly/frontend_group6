@@ -9,7 +9,7 @@ const Nav = () => {
                     <path
                         d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/>
                 </svg>
-                <span className="font-semibold text-xl tracking-tight">BooksNShit</span>
+                <span className="font-semibold text-xl tracking-tight">BooksNStuff</span>
             </div>
             <div className="block lg:hidden">
                 <button
@@ -22,14 +22,14 @@ const Nav = () => {
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow">
-                    <Link href="/Home">
+                    <Link href="/CreateBook">
                         <p className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-black mr-4">
-                            Home
+                            Add a Book
                         </p>
                     </Link>
                     <Link href="/AllBooks">
                         <p className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-black mr-4">
-                            All Books
+                            Browse All
                         </p>
                     </Link>
                     <Link href="/SearchedBooks">
