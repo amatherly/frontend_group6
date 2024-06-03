@@ -26,8 +26,8 @@ const BookDetails = ({ book }) => {
                 margin: '30px',
             }}>
                 <Card variant="outlined" style={{
-                    width: '350px',
-                    height: '700px',
+                    width: '400px',
+                    height: '800px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',

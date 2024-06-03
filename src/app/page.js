@@ -36,7 +36,7 @@ export default function Home() {
         <>
             <Nav/>
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <CreateBook/>
+                Group 6
             </main>
         </>
     )
