@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    future: {
-        webpack5: true,
-    },
+    // future: {
+    //     webpack5: true,
+    // },
 
     webpack(config) {
         config.resolve.fallback = {

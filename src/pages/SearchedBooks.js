@@ -9,15 +9,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// added this line
-import BookDetails from './BookDetails';  // Imported BoodDetails
+import BookDetails from './BookDetails';  // Imported BookDetails
 
 const SearchedBooks = () => {
     const [name, setName] = React.useState('');
     const [books, setBooks] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
-    // added thise 3 lines
     const [selectedBook, setSelectedBook] = React.useState(null); // SelectedBook state
     const [zoomedBook, setZoomedBook] = React.useState(null); // ZoomedBook state
     const containerRef = React.useRef(null); // useRef hook to create a ref for the container
@@ -64,12 +62,11 @@ const SearchedBooks = () => {
         }
     };
 
-    // added these lines
     const handleBookClick = (book) => {  // handle book click
         setSelectedBook(book); // update selected book state
         setZoomedBook(book); // update zoomed book state
     }
-    // mouse effect lines
+
     React.useEffect(() => {
         const handleClickOutside = (event) => {
             if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -154,33 +151,30 @@ const SearchedBooks = () => {
                     <p>Error: {error}</p>
                 </div>
                 }
-                 {/* Added this */}
-                <div ref={containerRef} className="grid mx-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-4 mt-6" id="book-grid"> {/* Added id attribute with "book-grid" value */}
+                {books.length > 0 && (
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom: '20px'
+                    }}>
+                        <p> {books.length} results</p>
+                    </div>
+                )}
+                <div ref={containerRef}
+                     className="grid mx-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6">
                     {books.map(book => (
-                        <div 
-                            key={book.isbn13} 
+                        <div
+                            key={book.isbn13}
                             onClick={() => handleBookClick(book)}
-                            className={zoomedBook === book ? 'zoomed' : ''} // Apply zoom effect 
-                            id={`book-${book.isbn13}`} 
-                        > 
-                            <BookCard book={book} />
+                            className={zoomedBook === book ? 'zoomed' : ''} // Apply zoom effect
+                            id={`book-${book.isbn13}`}
+                        >
+                            <BookCard book={book}/>
                         </div>
                     ))}
                 </div>
 
-                {books.length > 0 && (
-                    <div style={{
-                        margin: '30px',
-                    }}>
-                        {books.length} results
-                        <div
-                            className="grid mx-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-6">
-                            {books.map(book => (
-                                <BookCard key={book.isbn13} book={book}/>
-                            ))}
-                        </div>
-                    </div>
-                )}
                 {books.length === 0 && !loading && !error && (
                     <div style={{
                         display: 'flex',
@@ -196,7 +190,7 @@ const SearchedBooks = () => {
             {/* Added this */}
             {selectedBook && (
                 <div className={`book-details ${zoomedBook ? 'show' : ''}`}>
-                    <BookDetails book={selectedBook} />
+                    <BookDetails book={selectedBook}/>
                 </div>
             )}
         </>
@@ -204,4 +198,3 @@ const SearchedBooks = () => {
 };
 
 export default SearchedBooks;
-
