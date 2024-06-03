@@ -1,9 +1,11 @@
+'use client'
 import Image from "next/image";
 import BookDetails from "@/pages/BookDetails";
 import Nav from "@/components/Nav";
 import AllBooks from "@/pages/AllBooks";
 import createBook from "@/pages/CreateBook";
 import '../app/globals.css';
+import CreateBook from "@/pages/CreateBook";
 
 export default function Home() {
     const book = {
@@ -34,13 +36,7 @@ export default function Home() {
         <>
             <Nav/>
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <bookDetails/>
-                <createBook/>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                    <BookDetails book={
-                        book
-                    }/>
-                </div>
+                <CreateBook/>
             </main>
         </>
     )

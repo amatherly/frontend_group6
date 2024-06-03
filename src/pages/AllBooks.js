@@ -10,8 +10,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 // added this line
-import BookDetails from './BookDetails';  // Imported BoodDetails
-
+import BookDetails from './BookDetails';  // Imported BookDetails
 
 const AllBooks = () => {
     const [name, setName] = React.useState('');

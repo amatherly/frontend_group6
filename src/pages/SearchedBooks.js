@@ -155,7 +155,7 @@ const SearchedBooks = () => {
                 </div>
                 }
                  {/* Added this */}
-                <div ref={containerRef} className="grid mx-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6" id="book-grid"> {/* Added id attribute with "book-grid" value */}
+                <div ref={containerRef} className="grid mx-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-4 mt-6" id="book-grid"> {/* Added id attribute with "book-grid" value */}
                     {books.map(book => (
                         <div 
                             key={book.isbn13} 
@@ -174,7 +174,7 @@ const SearchedBooks = () => {
                     }}>
                         {books.length} results
                         <div
-                            className="grid mx-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6">
+                            className="grid mx-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-6">
                             {books.map(book => (
                                 <BookCard key={book.isbn13} book={book}/>
                             ))}
